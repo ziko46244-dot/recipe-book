@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Книга рецептов</title>
+<link rel="stylesheet" href="cc.css">
+</head>
+<body>
+
+<header>
+  <a href="cc.html" class="logo">🍳 Книга рецептов</a>
+  <div>
+    <span id="guest">
+      <button id="btn-show-login" class="btn-gray">Войти</button>
+      <button id="btn-show-register">Регистрация</button>
+    </span>
+    <span id="logged" class="hidden">
+      <span id="user-name"></span>
+      <a href="fav.html"><button class="btn-gray">Избранное</button></a>
+      <a href="pro.html"><button class="btn-gray">Кабинет</button></a>
+      <a href="adm.html" id="nav-admin" class="hidden"><button class="btn-gray">Админка</button></a>
+      <button id="btn-logout" class="btn-red">Выйти</button>
+    </span>
+  </div>
+</header>
+
+<!-- ================= ПРИВЕТСТВЕННЫЙ ЭКРАН ================= -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-tag">Домашняя кухня</span>
+      <h1>Готовьте вкусно<br>каждый день</h1>
+      <p>Коллекция проверенных рецептов с пошаговыми инструкциями,
+         списком ингредиентов и отзывами тех, кто уже готовил.</p>
+      <div class="hero-stats">
+        <div><b id="stat-count">—</b><span>рецептов</span></div>
+        <div><b>7</b><span>категорий</span></div>
+        <div><b>15<span class="min">мин</span></b><span>от и до</span></div>
+      </div>
+    </div>
+
+    <!-- Иллюстрация: нарисована кодом, картинок из интернета не требует -->
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 320 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="pan" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffd9a8"/>
+            <stop offset="1" stop-color="#ff9a6b"/>
+          </linearGradient>
+          <linearGradient id="steamG" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#ffffff" stop-opacity=".9"/>
+            <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+
+        <circle cx="160" cy="165" r="118" fill="url(#pan)" opacity=".35"/>
+
+        <!-- пар -->
+        <g class="steam">
+          <path d="M132 96c-14-16 10-24-2-40" stroke="url(#steamG)" stroke-width="7" stroke-linecap="round"/>
+          <path d="M162 88c-14-18 10-26-2-44" stroke="url(#steamG)" stroke-width="7" stroke-linecap="round"/>
+          <path d="M192 96c-14-16 10-24-2-40" stroke="url(#steamG)" stroke-width="7" stroke-linecap="round"/>
+        </g>
+
+        <!-- сковорода -->
+        <ellipse cx="160" cy="188" rx="96" ry="30" fill="#2b211c" opacity=".12"/>
+        <path d="M64 160h192a0 0 0 010 0v6c0 40-43 66-96 66s-96-26-96-66v-6z" fill="#3b2f28"/>
+        <rect x="248" y="150" width="70" height="15" rx="7.5" fill="#57463c"/>
+        <ellipse cx="160" cy="160" rx="96" ry="26" fill="#4a3b33"/>
+        <ellipse cx="160" cy="157" rx="84" ry="21" fill="url(#pan)"/>
+
+        <!-- еда -->
+        <circle cx="128" cy="154" r="15" fill="#e2562c"/>
+        <circle cx="168" cy="148" r="12" fill="#8fbf5a"/>
+        <circle cx="196" cy="160" r="10" fill="#f3b23f"/>
+        <circle cx="146" cy="166" r="8" fill="#f3b23f" opacity=".85"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Вход -->
+  <div class="panel hidden" id="login-panel">
+    <h2>Вход</h2>
+    <input type="email" id="login-email" placeholder="Email">
+    <input type="password" id="login-pass" placeholder="Пароль">
+    <p class="err" id="login-err"></p>
+    <p class="ok" id="login-ok"></p>
+    <button id="btn-login">Войти</button>
+    <button id="btn-reset" class="btn-gray">Забыл пароль</button>
+  </div>
+
+  <!-- Регистрация -->
+  <div class="panel hidden" id="register-panel">
+    <h2>Регистрация</h2>
+    <input type="text" id="reg-name" placeholder="Имя">
+    <input type="email" id="reg-email" placeholder="Email">
+    <input type="password" id="reg-pass" placeholder="Пароль (от 6 символов)">
+    <p class="err" id="reg-err"></p>
+    <button id="btn-register">Создать аккаунт</button>
+  </div>
+
+  <!-- Личный кабинет -->
+  <div class="panel hidden" id="profile-panel">
+    <h2>Личный кабинет</h2>
+    <p>Email: <b id="p-email"></b></p>
+    <p>Имя: <b id="p-name"></b></p>
+    <p>Роль: <b id="p-role"></b></p>
+  </div>
+
+  <!-- Админ-панель -->
+  <div class="panel hidden" id="admin-panel">
+    <h2>Добавить рецепт</h2>
+    <input type="text" id="a-title" placeholder="Название">
+    <input type="text" id="a-desc" placeholder="Краткое описание">
+    <select id="a-cat"></select>
+    <input type="number" id="a-time" placeholder="Время (мин)">
+    <input type="url" id="a-img" placeholder="Ссылка на фото (необязательно)">
+    <textarea id="a-ing" rows="4" placeholder="Ингредиенты — каждый с новой строки"></textarea>
+    <textarea id="a-steps" rows="4" placeholder="Шаги приготовления — каждый с новой строки"></textarea>
+    <p class="err" id="a-err"></p>
+    <button id="btn-add">Добавить рецепт</button>
+  </div>
+
+  <h2 id="list-title">Каталог рецептов</h2>
+
+  <!-- Быстрые кнопки категорий -->
+  <div class="chips" id="chips"></div>
+
+  <div class="filters">
+    <input type="search" id="f-search" placeholder="🔍  Поиск по названию...">
+    <select id="f-cat"><option value="">Все категории</option></select>
+    <select id="f-sort">
+      <option value="createdAt">Сначала новые</option>
+      <option value="cookTime">По времени</option>
+    </select>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <p class="center" id="state">Загрузка...</p>
+
+  <!-- Пагинация по номерам страниц -->
+  <div class="pager" id="pager"></div>
+  <p class="pager-info" id="pager-info"></p>
+
+</div>
+
+<footer class="site-footer">
+  <p>Книга рецептов · учебный проект на Firebase</p>
+</footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-auth-compat.js"></script>
+
+<script src="log.js"></script>
+<script src="cc.js"></script>
+
+</body>
+</html>

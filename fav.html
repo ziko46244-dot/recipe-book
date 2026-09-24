@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Избранное — Книга рецептов</title>
+<link rel="stylesheet" href="cc.css">
+</head>
+<body>
+
+<header>
+  <a href="cc.html" class="logo">🍳 Книга рецептов</a>
+  <div>
+    <span id="user-name"></span>
+    <a href="cc.html"><button class="btn-gray">Каталог</button></a>
+    <a href="pro.html"><button class="btn-gray">Кабинет</button></a>
+    <a href="adm.html" id="nav-admin" class="hidden"><button class="btn-gray">Админка</button></a>
+    <button id="btn-logout" class="btn-red">Выйти</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <p id="need-login" class="center hidden">
+    Войдите на <a href="cc.html" class="back-link">главной странице</a>, чтобы увидеть избранное.
+  </p>
+
+  <div id="fav-page" class="hidden">
+    <h1>Избранное</h1>
+    <p class="muted">Сохранённые рецепты. Соберите из них подборку — она попадёт
+       в историю личного кабинета.</p>
+
+    <!-- Финализация: собрать подборку -->
+    <div class="panel" id="finalize-panel">
+      <h2>Собрать подборку</h2>
+      <p class="muted">Например «Меню на выходные» или «Что приготовить на ужин».</p>
+      <input type="text" id="col-name" placeholder="Название подборки">
+      <p class="err" id="col-err"></p>
+      <p class="ok" id="col-ok"></p>
+      <button id="btn-finalize">Собрать подборку из <span id="fav-count">0</span> рецептов</button>
+    </div>
+
+    <h2 id="list-title">Сохранённые рецепты</h2>
+    <div class="grid" id="grid"></div>
+    <p class="center" id="state">Загрузка...</p>
+  </div>
+
+</div>
+
+<footer class="site-footer"><p>Книга рецептов · учебный проект на Firebase</p></footer>
+
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-auth-compat.js"></script>
+<script src="log.js"></script>
+<script src="fav.js"></script>
+
+</body>
+</html>

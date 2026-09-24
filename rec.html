@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Рецепт — Книга рецептов</title>
+<link rel="stylesheet" href="cc.css">
+</head>
+<body>
+
+<header>
+  <a href="cc.html" class="logo">🍳 Книга рецептов</a>
+  <div>
+    <span id="guest">
+      <a href="cc.html"><button>Войти</button></a>
+    </span>
+    <span id="logged" class="hidden">
+      <span id="user-name"></span>
+      <a href="cc.html"><button class="btn-gray">К каталогу</button></a>
+      <button id="btn-logout" class="btn-red">Выйти</button>
+    </span>
+  </div>
+</header>
+
+<div class="container">
+
+  <p><a href="cc.html" class="back-link">← Назад к каталогу</a></p>
+
+  <!-- Информация о рецепте -->
+  <div class="panel" id="recipe-box">
+    <p class="center" id="recipe-state">Загрузка рецепта...</p>
+
+    <div id="recipe-content" class="hidden">
+      <img id="r-photo" class="recipe-photo hidden" alt="">
+      <div class="recipe-head">
+        <div class="recipe-icon" id="r-icon">🍽</div>
+        <div>
+          <h1 id="r-title"></h1>
+          <p id="r-desc" class="muted"></p>
+          <div class="meta">
+            <span class="badge" id="r-cat"></span>
+            ⏱ <span id="r-time"></span> мин
+            · ★ <span id="r-rating">0.0</span> (<span id="r-count">0</span>)
+            · автор: <span id="r-author"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-cols">
+        <div>
+          <h2>Ингредиенты</h2>
+          <ul id="r-ingredients"></ul>
+        </div>
+        <div>
+          <h2>Приготовление</h2>
+          <ol id="r-steps"></ol>
+        </div>
+      </div>
+
+      <button id="btn-fav" class="btn-big">☆ Сохранить рецепт</button>
+    </div>
+  </div>
+
+  <!-- Отзывы -->
+  <div class="panel">
+    <h2>Отзывы</h2>
+
+    <!-- Форма отзыва (только для авторизованных) -->
+    <div id="review-form" class="hidden">
+      <select id="rev-rating">
+        <option value="5">★★★★★ Отлично</option>
+        <option value="4">★★★★ Хорошо</option>
+        <option value="3">★★★ Нормально</option>
+        <option value="2">★★ Так себе</option>
+        <option value="1">★ Плохо</option>
+      </select>
+      <input type="text" id="rev-text" placeholder="Ваш отзыв о рецепте...">
+      <p class="err" id="rev-err"></p>
+      <button id="btn-review">Оставить отзыв</button>
+    </div>
+
+    <p id="review-login-hint" class="muted">Войдите, чтобы оставить отзыв.</p>
+
+    <div id="reviews-list"></div>
+  </div>
+
+  <!-- Похожие рецепты -->
+  <div class="panel">
+    <h2>Похожие рецепты</h2>
+    <div class="grid" id="similar-grid"></div>
+    <p class="center" id="similar-state">Загрузка...</p>
+    <p class="center"><button id="btn-similar-more" class="hidden">Показать ещё</button></p>
+  </div>
+
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-auth-compat.js"></script>
+
+<script src="log.js"></script>
+<script src="rec.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Личный кабинет — Книга рецептов</title>
+<link rel="stylesheet" href="cc.css">
+</head>
+<body>
+
+<header>
+  <a href="cc.html" class="logo">🍳 Книга рецептов</a>
+  <div>
+    <span id="user-name"></span>
+    <a href="cc.html"><button class="btn-gray">Каталог</button></a>
+    <a href="fav.html"><button class="btn-gray">Избранное</button></a>
+    <a href="adm.html" id="nav-admin" class="hidden"><button class="btn-gray">Админка</button></a>
+    <button id="btn-logout" class="btn-red">Выйти</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <p id="need-login" class="center hidden">
+    Войдите на <a href="cc.html" class="back-link">главной странице</a>, чтобы открыть кабинет.
+  </p>
+
+  <div id="cabinet" class="hidden">
+
+    <h1>Личный кабинет</h1>
+
+    <!-- Редактирование профиля -->
+    <div class="panel">
+      <h2>Мои данные</h2>
+      <p class="muted">Email: <b id="p-email"></b> · роль: <b id="p-role"></b>
+         · с нами с <b id="p-created"></b></p>
+
+      <input type="text" id="p-name" placeholder="Ваше имя">
+      <input type="text" id="p-city" placeholder="Город (необязательно)">
+      <p class="err" id="p-err"></p>
+      <p class="ok" id="p-ok"></p>
+      <button id="btn-save">Сохранить изменения</button>
+    </div>
+
+    <!-- Статистика -->
+    <div class="panel">
+      <h2>Моя активность</h2>
+      <div class="hero-stats">
+        <div><b id="s-fav">0</b><span>в избранном</span></div>
+        <div><b id="s-rev">0</b><span>отзывов</span></div>
+        <div><b id="s-col">0</b><span>подборок</span></div>
+      </div>
+    </div>
+
+    <!-- История: мои отзывы -->
+    <div class="panel">
+      <h2>Мои отзывы</h2>
+      <p class="muted">Свои отзывы можно отредактировать или удалить.</p>
+      <div id="my-reviews"><p class="center">Загрузка...</p></div>
+    </div>
+
+    <!-- История моих действий -->
+    <div class="panel">
+      <h2>История моих действий</h2>
+      <p class="muted">Что вы делали на сайте. Эти же записи видит администратор.</p>
+      <div id="my-logs"><p class="center">Загрузка...</p></div>
+      <p class="center"><button id="btn-logs-more" class="btn-gray hidden">Показать ещё</button></p>
+    </div>
+
+    <!-- История: завершённые подборки -->
+    <div class="panel">
+      <h2>История подборок</h2>
+      <p class="muted">Подборки, собранные на странице «Избранное».</p>
+      <div id="my-collections"><p class="center">Загрузка...</p></div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer"><p>Книга рецептов · учебный проект на Firebase</p></footer>
+
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-auth-compat.js"></script>
+<script src="log.js"></script>
+<script src="pro.js"></script>
+
+</body>
+</html>

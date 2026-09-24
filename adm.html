@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Админ-панель — Книга рецептов</title>
+<link rel="stylesheet" href="cc.css">
+</head>
+<body>
+
+<header>
+  <a href="cc.html" class="logo">🍳 Книга рецептов</a>
+  <div>
+    <span id="user-name"></span>
+    <a href="cc.html"><button class="btn-gray">Каталог</button></a>
+    <a href="pro.html"><button class="btn-gray">Кабинет</button></a>
+    <button id="btn-logout" class="btn-red">Выйти</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <p id="no-access" class="center hidden">
+    Доступ только для администраторов.
+    <a href="cc.html" class="back-link">Вернуться в каталог</a>
+  </p>
+
+  <div id="admin-page" class="hidden">
+
+    <h1>Админ-панель</h1>
+
+    <!-- Статистика проекта -->
+    <div class="panel">
+      <h2>Статистика</h2>
+      <div class="hero-stats">
+        <div><b id="s-recipes">0</b><span>рецептов</span></div>
+        <div><b id="s-users">0</b><span>пользователей</span></div>
+        <div><b id="s-reviews">0</b><span>отзывов</span></div>
+        <div><b id="s-cols">0</b><span>подборок</span></div>
+      </div>
+    </div>
+
+    <!-- Форма: добавление и редактирование рецепта -->
+    <div class="panel" id="admin-panel">
+      <h2 id="form-title">Добавить рецепт</h2>
+      <input type="text" id="a-title" placeholder="Название">
+      <input type="text" id="a-desc" placeholder="Краткое описание">
+      <select id="a-cat"></select>
+      <input type="number" id="a-time" placeholder="Время (мин)">
+      <input type="url" id="a-img" placeholder="Ссылка на фото (необязательно)">
+      <textarea id="a-ing" rows="4" placeholder="Ингредиенты — каждый с новой строки"></textarea>
+      <textarea id="a-steps" rows="4" placeholder="Шаги приготовления — каждый с новой строки"></textarea>
+      <p class="err" id="a-err"></p>
+      <p class="ok" id="a-ok"></p>
+      <button id="btn-save">Добавить рецепт</button>
+      <button id="btn-cancel" class="btn-gray hidden">Отменить редактирование</button>
+    </div>
+
+    <!-- Список рецептов -->
+    <div class="panel">
+      <h2>Рецепты</h2>
+      <input type="search" id="admin-search" placeholder="🔍  Фильтр по названию...">
+      <div id="admin-recipes"><p class="center">Загрузка...</p></div>
+    </div>
+
+    <!-- Пользователи -->
+    <div class="panel">
+      <h2>Пользователи</h2>
+      <p class="muted">Назначение прав доступа. Свою роль снять нельзя.</p>
+      <div id="admin-users"><p class="center">Загрузка...</p></div>
+    </div>
+
+    <!-- История действий пользователей -->
+    <div class="panel">
+      <h2>История действий пользователей</h2>
+      <p class="muted">Журнал всех действий на сайте. Обновляется в реальном времени.</p>
+
+      <select id="log-user">
+        <option value="">Все пользователи</option>
+      </select>
+
+      <select id="log-type">
+        <option value="">Все действия</option>
+        <option value="авторизация">Авторизация</option>
+        <option value="избранное">Избранное</option>
+        <option value="отзыв">Отзывы</option>
+        <option value="подборка">Подборки</option>
+        <option value="профиль">Профиль</option>
+        <option value="админ">Админские действия</option>
+      </select>
+
+      <div id="admin-logs"><p class="center">Загрузка...</p></div>
+      <p class="center">
+        <button id="btn-logs-more" class="btn-gray hidden">Показать ещё</button>
+      </p>
+    </div>
+
+    <!-- Модерация -->
+    <div class="panel">
+      <h2>Модерация отзывов</h2>
+      <p class="muted">Последние отзывы со всех рецептов.</p>
+      <div id="admin-reviews"><p class="center">Загрузка...</p></div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer"><p>Книга рецептов · учебный проект на Firebase</p></footer>
+
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.8.0/firebase-auth-compat.js"></script>
+<script src="log.js"></script>
+<script src="adm.js"></script>
+
+</body>
+</html>
